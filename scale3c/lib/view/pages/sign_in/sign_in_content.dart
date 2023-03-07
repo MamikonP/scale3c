@@ -47,6 +47,11 @@ class SignInContent extends StatelessWidget with AuthControllerMixin {
               onPressed: facebookSiginFirebaseUseCase,
               icon: const Icon(Icons.facebook),
               label: const Text('Facebook'),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => context.push(RouteName.linkedinAuth),
+              icon: const Icon(Icons.link),
+              label: const Text('Linkedin'),
             )
           ],
         )
