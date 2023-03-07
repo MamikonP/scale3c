@@ -1,0 +1,4 @@
+enum SpacingDirection {
+  vertical,
+  horizontal
+}

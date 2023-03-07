@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:linkedin_login/linkedin_login.dart';
 import '../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
 import '../../domain/usecases/email_signup_firebase/email_sign_up_firebase.dart';
 import '../../domain/usecases/facebook_sigin_in_firebase/facebook_sigin_firebase.dart';

@@ -1,0 +1,1 @@
+enum FieldInputType { email, password }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'shared/navigation/routes.dart';
+import 'shared/styles/color_scheme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -8,9 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: CustomThemeData().lightTheme,
       routerConfig: router,
     );
   }
