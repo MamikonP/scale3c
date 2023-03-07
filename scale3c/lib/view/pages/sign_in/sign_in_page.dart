@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
+import '../../../domain/usecases/facebook_sigin_in_firebase/facebook_sigin_firebase.dart';
 import '../../../domain/usecases/firebase_sign_out/firebase_sign_out.dart';
 import '../../widgets/profile.dart';
 import '../app_page.dart';
@@ -11,11 +12,13 @@ class SignInPage extends StatelessWidget {
   const SignInPage({
     required this.emailSigninFirebaseUseCase,
     required this.firebaseSignOutUseCase,
+    required this.facebookSiginFirebaseUseCase,
     super.key,
   });
 
   final EmailSigninFirebaseUseCase emailSigninFirebaseUseCase;
   final FirebaseSignOutUseCase firebaseSignOutUseCase;
+  final FacebookSiginFirebaseUseCase facebookSiginFirebaseUseCase;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,7 @@ class SignInPage extends StatelessWidget {
           }
           return SignInContent(
             emailSigninFirebaseUseCase: emailSigninFirebaseUseCase,
+            facebookSiginFirebaseUseCase: facebookSiginFirebaseUseCase,
           );
         },
       ),

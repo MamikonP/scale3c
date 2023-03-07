@@ -20,6 +20,11 @@ class FirebaseAuthRepositoryImpl implements IFirebaseAuthRepository {
   }
 
   @override
+  Future<void> signInWithCredentials(OAuthCredential credential) async {
+    await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  @override
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
