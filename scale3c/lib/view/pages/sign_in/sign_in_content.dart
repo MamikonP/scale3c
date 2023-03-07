@@ -34,5 +34,6 @@ class SignInContent extends StatelessWidget {
     );
   }
 
-  void _firebaseSignIn() => emailSigninFirebaseUseCase(_emailController.text, _passwordController.text);
+  void _firebaseSignIn() => emailSigninFirebaseUseCase(
+      _emailController.text, _passwordController.text);
 }

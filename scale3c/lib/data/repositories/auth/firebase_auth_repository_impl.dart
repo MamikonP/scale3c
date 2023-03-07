@@ -10,4 +10,9 @@ class FirebaseAuthRepositoryImpl implements IFirebaseAuthRepository {
       password: password,
     );
   }
+
+  @override
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

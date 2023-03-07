@@ -2,13 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
+import '../../../domain/usecases/firebase_sign_out/firebase_sign_out.dart';
 import '../../widgets/profile.dart';
 import 'sign_in_content.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({required this.emailSigninFirebaseUseCase, super.key});
+  const SignInPage({
+    required this.emailSigninFirebaseUseCase,
+    required this.firebaseSignOutUseCase,
+    super.key,
+  });
 
   final EmailSigninFirebaseUseCase emailSigninFirebaseUseCase;
+  final FirebaseSignOutUseCase firebaseSignOutUseCase;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +31,10 @@ class SignInPage extends StatelessWidget {
             );
           }
           if (snapshot.hasData) {
-            return Profile(snapshot.data!);
+            return Profile(
+              snapshot.data!,
+              firebaseSignOutUseCase: firebaseSignOutUseCase,
+            );
           }
           return SignInContent(
             emailSigninFirebaseUseCase: emailSigninFirebaseUseCase,
