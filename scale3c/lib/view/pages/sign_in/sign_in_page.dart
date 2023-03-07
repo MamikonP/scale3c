@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
 import '../../../domain/usecases/firebase_sign_out/firebase_sign_out.dart';
 import '../../widgets/profile.dart';
+import '../app_page.dart';
 import 'sign_in_content.dart';
 
 class SignInPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppPage(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {

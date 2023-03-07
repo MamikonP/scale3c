@@ -12,6 +12,14 @@ class FirebaseAuthRepositoryImpl implements IFirebaseAuthRepository {
   }
 
   @override
+  Future<void> signUpWithEmailPassword(String email, String password) async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  @override
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
