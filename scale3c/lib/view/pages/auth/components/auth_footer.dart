@@ -1,6 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/gaps/gaps.dart';
+import '../../../constants/spacing_direction.dart';
+import '../../../widgets/spacing.dart';
+
 class AuthFooter extends StatelessWidget {
   const AuthFooter({
     required this.text,
@@ -20,6 +24,11 @@ class AuthFooter extends StatelessWidget {
         text: text,
         style: TextStyle(color: Theme.of(context).colorScheme.primaryContainer),
         children: <InlineSpan>[
+          WidgetSpan(
+              child: Spacing(
+            medium,
+            direction: SpacingDirection.horizontal,
+          )),
           TextSpan(
             recognizer: TapGestureRecognizer()..onTap = callback,
             text: spanText,

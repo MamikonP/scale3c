@@ -9,6 +9,7 @@ class AppPage extends StatelessWidget {
     this.footer,
     this.bodyPadding,
     this.centered = true,
+    this.appBar,
     super.key,
   });
 
@@ -17,10 +18,12 @@ class AppPage extends StatelessWidget {
   final bool scrollable;
   final EdgeInsets? bodyPadding;
   final bool centered;
+  final PreferredSizeWidget? appBar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar,
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,

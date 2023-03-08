@@ -6,6 +6,7 @@ import '../../../../shared/gaps/gaps.dart';
 import '../../../../shared/navigation/route_name.dart';
 import '../../../bloc/auth/auth_bloc.dart';
 import '../../../constants/social_button_type.dart';
+import '../../../widgets/image_widget.dart';
 
 class SocialButtons extends StatelessWidget {
   const SocialButtons({
@@ -22,7 +23,9 @@ class SocialButtons extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (type == SocialButtonType.facebook) {
-                      context.read<AuthBloc>().add(const FirebaseFacebookSignIn());
+                      context
+                          .read<AuthBloc>()
+                          .add(const FirebaseFacebookSignIn());
                     } else if (type == SocialButtonType.linkedin) {
                       context.push(RouteName.linkedinAuth);
                     }
@@ -36,7 +39,7 @@ class SocialButtons extends StatelessWidget {
                       border: Border.all(
                           color: Theme.of(context).colorScheme.outline),
                     ),
-                    child: Icon(type.iconData),
+                    child: ImageWidget(assetImage: type.assetIcon),
                   ),
                 ),
               ),

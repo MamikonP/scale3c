@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../services/launch_url_service.dart';
+import '../../../shared/constants.dart';
 import '../../../shared/gaps/gaps.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/spacing_direction.dart';
@@ -86,17 +88,19 @@ class ProfileContent extends StatelessWidget {
                 UserSocialDetail(
                   title: 'Phone Number',
                   subtitle: user?.phoneNumber ?? 'Not specified',
-                  iconData: Icons.phone,
+                  assetIcon: icPhone,
+                  callback: () async => LaunchUrlService().call(),
                 ),
                 UserSocialDetail(
                   title: 'Email',
                   subtitle: user?.email ?? 'Unknown',
-                  iconData: Icons.email,
+                  assetIcon: icMail,
+                  callback: () async => LaunchUrlService().sendEmail(),
                 ),
                 const UserSocialDetail(
                   title: 'Completed Projects',
                   subtitle: '248',
-                  iconData: Icons.donut_large,
+                  assetIcon: icDot,
                 ),
               ],
             ),

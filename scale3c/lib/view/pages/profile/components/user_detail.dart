@@ -21,7 +21,7 @@ class UserDetail extends StatelessWidget {
           child: user?.photoURL != null
               ? CircleAvatar(
                   backgroundImage: NetworkImage(user!.photoURL!),
-                  radius: 20,
+                  radius: 50,
                 )
               : Container(
                   width: 100,

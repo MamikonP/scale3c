@@ -7,23 +7,25 @@ class ImageWidget extends StatelessWidget {
   const ImageWidget({
     required this.assetImage,
     this.imageType = ImageType.svg,
+    this.boxFit = BoxFit.none,
     super.key,
   });
 
   final String assetImage;
   final ImageType imageType;
+  final BoxFit boxFit;
 
   @override
   Widget build(BuildContext context) {
     if (imageType == ImageType.svg) {
       return SvgPicture.asset(
         assetImage,
-        fit: BoxFit.cover,
+        fit: boxFit,
       );
     }
     return Image.asset(
       assetImage,
-      fit: BoxFit.none,
+      fit: boxFit,
     );
   }
 }

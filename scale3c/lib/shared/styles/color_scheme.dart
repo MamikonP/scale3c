@@ -7,6 +7,11 @@ class CustomThemeData {
         scaffoldBackgroundColor:
             CustomColorScheme().colorSchemeLight.background,
         colorScheme: CustomColorScheme().colorSchemeLight,
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          iconTheme: IconThemeData(
+              color: CustomColorScheme().colorSchemeLight.onBackground),
+        ),
       );
 }
 

@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import '../../shared/constants.dart';
 
 enum SocialButtonType {
-  facebook(Icons.facebook),
-  twitter(Icons.two_k_outlined),
-  linkedin(Icons.link);
+  facebook(icFacebook),
+  twitter(icTwitter),
+  linkedin(icLinkedin);
 
-  const SocialButtonType(this.iconData);
+  const SocialButtonType(this.assetIcon);
 
-  final IconData iconData;
+  final String assetIcon;
 }
