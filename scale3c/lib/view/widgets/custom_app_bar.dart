@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/constants.dart';
-import '../../shared/gaps/gaps.dart';
 import 'app_text.dart';
-import 'image_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({required this.title, this.actions, super.key});
