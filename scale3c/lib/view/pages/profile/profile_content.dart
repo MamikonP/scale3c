@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../shared/gaps/gaps.dart';
+import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/spacing_direction.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_text.dart';
@@ -16,82 +19,90 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        SizedBox(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Spacing(extraLarge),
-              UserDetail(user: user),
-              Spacing(large),
-              GestureDetector(
-                child: AppText(
-                  text: 'Edit',
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  textDecoration: TextDecoration.underline,
-                  textAlign: TextAlign.center,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (BuildContext context, AuthState state) {
+        state.whenOrNull(
+          success: () => context.pop(),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Spacing(extraLarge),
+                UserDetail(user: user),
+                Spacing(large),
+                GestureDetector(
+                  child: AppText(
+                    text: 'Edit',
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    textDecoration: TextDecoration.underline,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              Spacing(large),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: AppButton(
-                      onPressed: () {},
-                      outlined: true,
-                      child: AppText(
-                        text: 'About Me',
-                        color: Theme.of(context).colorScheme.onBackground,
+                Spacing(large),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: AppButton(
+                        onPressed: () {},
+                        outlined: true,
+                        child: AppText(
+                          text: 'About Me',
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
                       ),
                     ),
-                  ),
-                  Spacing(
-                    large,
-                    direction: SpacingDirection.horizontal,
-                  ),
-                  Expanded(
-                    child: AppButton(
-                      onPressed: () {},
-                      child: const AppText(
-                        text: 'Logout',
+                    Spacing(
+                      large,
+                      direction: SpacingDirection.horizontal,
+                    ),
+                    Expanded(
+                      child: AppButton(
+                        onPressed: () {
+                          context.read<AuthBloc>().add(const FirebaseSignOut());
+                        },
+                        child: const AppText(
+                          text: 'Logout',
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        Spacing(
-          extraLarge,
-        ),
-        Container(
-          alignment: Alignment.bottomCenter,
-          color: Theme.of(context).colorScheme.onBackground,
-          child: Column(
-            children: <Widget>[
-              UserSocialDetail(
-                title: 'Phone Number',
-                subtitle: user?.phoneNumber ?? 'Not specified',
-                iconData: Icons.phone,
-              ),
-              UserSocialDetail(
-                title: 'Email',
-                subtitle: user?.email ?? 'Unknown',
-                iconData: Icons.email,
-              ),
-              const UserSocialDetail(
-                title: 'Completed Projects',
-                subtitle: '248',
-                iconData: Icons.donut_large,
-              ),
-            ],
+          Container(
+            alignment: Alignment.bottomCenter,
+            color: Theme.of(context).colorScheme.onBackground,
+            child: Column(
+              children: <Widget>[
+                UserSocialDetail(
+                  title: 'Phone Number',
+                  subtitle: user?.phoneNumber ?? 'Not specified',
+                  iconData: Icons.phone,
+                ),
+                UserSocialDetail(
+                  title: 'Email',
+                  subtitle: user?.email ?? 'Unknown',
+                  iconData: Icons.email,
+                ),
+                const UserSocialDetail(
+                  title: 'Completed Projects',
+                  subtitle: '248',
+                  iconData: Icons.donut_large,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

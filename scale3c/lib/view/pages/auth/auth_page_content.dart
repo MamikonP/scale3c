@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
-import '../../../domain/usecases/email_signup_firebase/email_sign_up_firebase.dart';
-import '../../../domain/usecases/facebook_sigin_in_firebase/facebook_sigin_firebase.dart';
 import '../../../shared/gaps/gaps.dart';
+import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/auth_type.dart';
 import '../../constants/image_type.dart';
 import '../../constants/input_type.dart';
@@ -20,16 +19,10 @@ import 'helpers/auth_helper.dart';
 class AuthPageContent extends StatelessWidget with AuthControllerMixin {
   AuthPageContent({
     this.authType = AuthType.sigin,
-    this.emailSigninFirebaseUseCase,
-    this.emailSignupFirebaseUseCase,
-    this.facebookSiginFirebaseUseCase,
     super.key,
   });
 
   final AuthType authType;
-  final EmailSigninFirebaseUseCase? emailSigninFirebaseUseCase;
-  final EmailSignupFirebaseUseCase? emailSignupFirebaseUseCase;
-  final FacebookSiginFirebaseUseCase? facebookSiginFirebaseUseCase;
 
   @override
   Widget build(BuildContext context) {
@@ -69,24 +62,22 @@ class AuthPageContent extends StatelessWidget with AuthControllerMixin {
           ),
         Spacing(extraLarge),
         AppButton(
-          onPressed: _authenticateUser,
+          onPressed: () => _authenticateUser(context),
           child: AppText(
             text: AuthHelper.of(authType).actionText,
           ),
         ),
         const OrLabel(),
-        SocialButtons(
-          facebookSiginFirebaseUseCase: facebookSiginFirebaseUseCase,
-        ),
+        const SocialButtons(),
       ],
     );
   }
 
-  void _authenticateUser() {
-    authType == AuthType.sigin
-        ? emailSigninFirebaseUseCase?.call(
-            emailController.text, passwordController.text)
-        : emailSignupFirebaseUseCase?.call(
-            emailController.text, passwordController.text);
+  void _authenticateUser(BuildContext context) {
+    authType == AuthType.sigin ?
+    context.read<AuthBloc>().add(AuthEvent.firebaseSignInWithEmail(
+        emailController.text, passwordController.text)) : 
+    context.read<AuthBloc>().add(AuthEvent.firebaseSignUpWithEmail(
+        emailController.text, passwordController.text));
   }
 }

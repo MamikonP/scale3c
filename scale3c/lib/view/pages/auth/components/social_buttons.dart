@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../domain/usecases/facebook_sigin_in_firebase/facebook_sigin_firebase.dart';
 import '../../../../shared/gaps/gaps.dart';
 import '../../../../shared/navigation/route_name.dart';
+import '../../../bloc/auth/auth_bloc.dart';
 import '../../../constants/social_button_type.dart';
 
 class SocialButtons extends StatelessWidget {
   const SocialButtons({
-    required this.facebookSiginFirebaseUseCase,
     super.key,
   });
-
-  final FacebookSiginFirebaseUseCase? facebookSiginFirebaseUseCase;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class SocialButtons extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (type == SocialButtonType.facebook) {
-                      facebookSiginFirebaseUseCase?.call();
+                      context.read<AuthBloc>().add(const FirebaseFacebookSignIn());
                     } else if (type == SocialButtonType.linkedin) {
                       context.push(RouteName.linkedinAuth);
                     }
