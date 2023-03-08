@@ -31,10 +31,4 @@ GoRouter router = GoRouter(
         path: RouteName.profile,
         builder: (BuildContext context, GoRouterState state) => const ProfilePage()),
   ],
-  redirect: (BuildContext context, GoRouterState state) {
-    if (state.path == RouteName.signIn) {
-      return RouteName.root;
-    }
-    return state.path;
-  },
 );

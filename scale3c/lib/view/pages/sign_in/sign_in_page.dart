@@ -58,23 +58,7 @@ class SignInPage extends StatelessWidget {
           );
         },
         builder: (BuildContext context, AuthState state) {
-          return StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
-                );
-              }
-              if (snapshot.hasData) {
-                // context.read<AuthBloc>().add(AuthEvent.started());
-              }
-              return AuthPageContent();
-            },
-          );
+          return AuthPageContent();
         },
       ),
     );

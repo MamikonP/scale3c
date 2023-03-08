@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../services/launch_url_service.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/gaps/gaps.dart';
+import '../../../shared/navigation/route_name.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/spacing_direction.dart';
 import '../../widgets/app_button.dart';
@@ -23,8 +24,16 @@ class ProfileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (BuildContext context, AuthState state) {
-        state.whenOrNull(
-          success: () => context.pop(),
+        state.maybeWhen(
+          loading: () => const CircularProgressIndicator(),
+          success: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {}
+          },
+          orElse: () {
+            context.go(RouteName.profile);
+          },
         );
       },
       child: Column(
