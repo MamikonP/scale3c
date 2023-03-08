@@ -68,14 +68,16 @@ class AuthPageContent extends StatelessWidget with AuthControllerMixin {
             textAlign: TextAlign.end,
           ),
         Spacing(extraLarge),
-        AppButon(
+        AppButton(
           onPressed: _authenticateUser,
           child: AppText(
             text: AuthHelper.of(authType).actionText,
           ),
         ),
         const OrLabel(),
-        SocialButtons(facebookSiginFirebaseUseCase: facebookSiginFirebaseUseCase,),
+        SocialButtons(
+          facebookSiginFirebaseUseCase: facebookSiginFirebaseUseCase,
+        ),
       ],
     );
   }

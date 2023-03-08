@@ -7,6 +7,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.isBold = false,
     this.fontSize,
+    this.textDecoration = TextDecoration.none,
     super.key,
   });
 
@@ -15,6 +16,7 @@ class AppText extends StatelessWidget {
   final TextAlign? textAlign;
   final bool isBold;
   final double? fontSize;
+  final TextDecoration textDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,8 @@ class AppText extends StatelessWidget {
       style: TextStyle(
           color: color,
           fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-          fontSize: fontSize
-          ),
+          fontSize: fontSize,
+          decoration: textDecoration),
       textAlign: textAlign,
     );
   }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +6,7 @@ import '../../domain/usecases/email_sigin_firebase/email_signin_firebase.dart';
 import '../../domain/usecases/email_signup_firebase/email_sign_up_firebase.dart';
 import '../../domain/usecases/facebook_sigin_in_firebase/facebook_sigin_firebase.dart';
 import '../../domain/usecases/firebase_sign_out/firebase_sign_out.dart';
+import '../../view/pages/profile/profile_page.dart';
 import '../../view/pages/sign_in/sign_in_page.dart';
 import '../../view/pages/sign_up/sign_up_page.dart';
 import '../../view/widgets/linkedin.dart';
@@ -40,6 +42,11 @@ GoRouter router = GoRouter(
       path: RouteName.linkedinAuth,
       builder: (BuildContext context, GoRouterState state) =>
           const Linkedin()
-    )
+    ),
+    GoRoute(
+      path: RouteName.profile,
+      builder: (BuildContext context, GoRouterState state) =>
+          ProfilePage(FirebaseAuth.instance.currentUser)
+    ),
   ],
 );

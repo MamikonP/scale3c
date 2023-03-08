@@ -11,6 +11,7 @@ import '../../widgets/profile.dart';
 import '../app_page.dart';
 import '../auth/auth_page_content.dart';
 import '../auth/components/auth_footer.dart';
+import '../profile/profile_content.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({
@@ -47,10 +48,9 @@ class SignInPage extends StatelessWidget {
             );
           }
           if (snapshot.hasData) {
-            return Profile(
-              snapshot.data!,
-              firebaseSignOutUseCase: firebaseSignOutUseCase,
-            );
+            Future<void>.microtask(() {
+              context.pushReplacement(RouteName.profile);
+            });
           }
           return AuthPageContent(
             emailSigninFirebaseUseCase: emailSigninFirebaseUseCase,
