@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../shared/navigation/route_name.dart';
 import '../../bloc/auth/auth_bloc.dart';
-import '../../widgets/app_text.dart';
 import '../app_page.dart';
 import 'profile_content.dart';
 
