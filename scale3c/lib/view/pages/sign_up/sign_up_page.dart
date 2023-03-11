@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/constants.dart';
 import '../../../shared/gaps/gaps.dart';
+import '../../../shared/navigation/route_name.dart';
+import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/auth_type.dart';
+import '../../widgets/app_text.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/image_widget.dart';
 import '../app_page.dart';
@@ -36,8 +41,25 @@ class SignUpPage extends StatelessWidget {
           context.pop();
         },
       ),
-      body: AuthPageContent(
-        authType: AuthType.signup,
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (BuildContext context, AuthState state) {
+          state.whenOrNull(
+            signedIn: (User user) => context.go(RouteName.profile),
+            error: (String error) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: AppText(
+                  text: error,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          );
+        },
+        builder: (BuildContext context, AuthState state) {
+          return AuthPageContent(
+            authType: AuthType.signup,
+          );
+        },
       ),
     );
   }

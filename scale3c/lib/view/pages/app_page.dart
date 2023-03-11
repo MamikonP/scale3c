@@ -8,7 +8,6 @@ class AppPage extends StatelessWidget {
     this.scrollable = false,
     this.footer,
     this.bodyPadding,
-    this.centered = true,
     this.appBar,
     super.key,
   });
@@ -17,7 +16,6 @@ class AppPage extends StatelessWidget {
   final Widget? footer;
   final bool scrollable;
   final EdgeInsets? bodyPadding;
-  final bool centered;
   final PreferredSizeWidget? appBar;
 
   @override
@@ -25,27 +23,17 @@ class AppPage extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+      body: SafeArea(
         child: Column(
           children: <Widget>[
             Expanded(
               child: Padding(
                 padding: bodyPadding ?? EdgeInsets.zero,
-                child: centered
-                    ? Center(
-                        child: !scrollable
-                            ? body
-                            : SingleChildScrollView(
-                                child: body,
-                              ),
+                child: scrollable
+                    ? SingleChildScrollView(
+                        child: body,
                       )
-                    : scrollable
-                        ? SingleChildScrollView(
-                            child: body,
-                          )
-                        : body,
+                    : body,
               ),
             ),
             if (footer != null)

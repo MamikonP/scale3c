@@ -9,6 +9,7 @@ class InputField extends StatelessWidget {
     this.borderRadius,
     this.hint,
     this.inputType,
+    this.focusNode,
     super.key,
   });
 
@@ -17,11 +18,13 @@ class InputField extends StatelessWidget {
   final double? borderRadius;
   final String? hint;
   final FieldInputType? inputType;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       key: formKey,
+      focusNode: focusNode,
       controller: controller,
       obscureText: inputType == FieldInputType.password,
       keyboardType: _keyboardType,

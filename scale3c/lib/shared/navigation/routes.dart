@@ -13,11 +13,6 @@ GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) =>
           const SignInPage(),
     ),
-    // GoRoute(
-    //   path: RouteName.signIn,
-    //   builder: (BuildContext context, GoRouterState state) =>
-    //       const SignInPage(),
-    // ),
     GoRoute(
       path: RouteName.signUp,
       builder: (BuildContext context, GoRouterState state) =>
@@ -29,6 +24,7 @@ GoRouter router = GoRouter(
             const Linkedin()),
     GoRoute(
         path: RouteName.profile,
-        builder: (BuildContext context, GoRouterState state) => const ProfilePage()),
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfilePage()),
   ],
 );

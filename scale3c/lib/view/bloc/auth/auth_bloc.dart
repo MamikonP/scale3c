@@ -87,6 +87,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onFirebaseSignOut(
       FirebaseSignOut event, Emitter<AuthState> emit) async {
     emit(const _Loading());
-    await firebaseSignOutUseCase().whenComplete(() => emit(const _Success()));
+    await firebaseSignOutUseCase();
+    print('logged out');
+    emit(const _Success());
+    print('logged out2');
   }
 }

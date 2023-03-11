@@ -42,11 +42,8 @@ class SignInPage extends StatelessWidget {
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (BuildContext context, AuthState state) {
-          state.when(
-            initial: () {},
-            signedIn: (User user) => context.push(RouteName.profile),
-            success: () {},
-            loading: () => const CircularProgressIndicator(),
+          state.whenOrNull(
+            signedIn: (User user) => context.go(RouteName.profile),
             error: (String error) => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: AppText(

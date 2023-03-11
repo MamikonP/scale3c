@@ -22,100 +22,85 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (BuildContext context, AuthState state) {
-        state.maybeWhen(
-          loading: () => const CircularProgressIndicator(),
-          success: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {}
-          },
-          orElse: () {
-            context.go(RouteName.profile);
-          },
-        );
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Spacing(extraLarge),
-                UserDetail(user: user),
-                Spacing(large),
-                GestureDetector(
-                  child: AppText(
-                    text: 'Edit',
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                    textDecoration: TextDecoration.underline,
-                    textAlign: TextAlign.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Spacing(extraLarge),
+              UserDetail(user: user),
+              Spacing(large),
+              GestureDetector(
+                child: AppText(
+                  text: 'Edit',
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  textDecoration: TextDecoration.underline,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Spacing(large),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: AppButton(
+                      onPressed: () {},
+                      outlined: true,
+                      child: AppText(
+                        text: 'About Me',
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
                   ),
-                ),
-                Spacing(large),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: AppButton(
-                        onPressed: () {},
-                        outlined: true,
-                        child: AppText(
-                          text: 'About Me',
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
+                  Spacing(
+                    large,
+                    direction: SpacingDirection.horizontal,
+                  ),
+                  Expanded(
+                    child: AppButton(
+                      onPressed: () {
+                        context.read<AuthBloc>().add(const FirebaseSignOut());
+                      },
+                      child: const AppText(
+                        text: 'Logout',
                       ),
                     ),
-                    Spacing(
-                      large,
-                      direction: SpacingDirection.horizontal,
-                    ),
-                    Expanded(
-                      child: AppButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(const FirebaseSignOut());
-                        },
-                        child: const AppText(
-                          text: 'Logout',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            color: Theme.of(context).colorScheme.onBackground,
-            child: Column(
-              children: <Widget>[
-                UserSocialDetail(
-                  title: 'Phone Number',
-                  subtitle: user?.phoneNumber ?? 'Not specified',
-                  assetIcon: icPhone,
-                  callback: () async => LaunchUrlService().call(),
-                ),
-                UserSocialDetail(
-                  title: 'Email',
-                  subtitle: user?.email ?? 'Unknown',
-                  assetIcon: icMail,
-                  callback: () async => LaunchUrlService().sendEmail(),
-                ),
-                const UserSocialDetail(
-                  title: 'Completed Projects',
-                  subtitle: '248',
-                  assetIcon: icDot,
-                ),
-              ],
-            ),
+        ),
+        Container(
+          alignment: Alignment.bottomCenter,
+          color: Theme.of(context).colorScheme.onBackground,
+          child: Column(
+            children: <Widget>[
+              UserSocialDetail(
+                title: 'Phone Number',
+                subtitle: user?.phoneNumber ?? 'Not specified',
+                assetIcon: icPhone,
+                callback: () async => LaunchUrlService().call(),
+              ),
+              UserSocialDetail(
+                title: 'Email',
+                subtitle: user?.email ?? 'Unknown',
+                assetIcon: icMail,
+                callback: () async => LaunchUrlService().sendEmail(),
+              ),
+              const UserSocialDetail(
+                title: 'Completed Projects',
+                subtitle: '248',
+                assetIcon: icDot,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

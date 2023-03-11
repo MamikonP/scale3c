@@ -74,10 +74,10 @@ class AuthPageContent extends StatelessWidget with AuthControllerMixin {
   }
 
   void _authenticateUser(BuildContext context) {
-    authType == AuthType.sigin ?
-    context.read<AuthBloc>().add(AuthEvent.firebaseSignInWithEmail(
-        emailController.text, passwordController.text)) : 
-    context.read<AuthBloc>().add(AuthEvent.firebaseSignUpWithEmail(
-        emailController.text, passwordController.text));
+    authType == AuthType.sigin
+        ? context.read<AuthBloc>().add(AuthEvent.firebaseSignInWithEmail(
+            emailController.text, passwordController.text))
+        : context.read<AuthBloc>().add(AuthEvent.firebaseSignUpWithEmail(
+            emailController.text, passwordController.text));
   }
 }
