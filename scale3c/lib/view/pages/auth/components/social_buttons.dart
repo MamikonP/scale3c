@@ -33,7 +33,7 @@ class SocialButtons extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: small),
                     padding: EdgeInsets.symmetric(
-                      vertical: medium,
+                      vertical: larger,
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(

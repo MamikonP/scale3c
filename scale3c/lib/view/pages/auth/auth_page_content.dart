@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../shared/constants.dart';
 import '../../../shared/gaps/gaps.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../constants/auth_type.dart';
@@ -27,14 +28,13 @@ class AuthPageContent extends StatelessWidget with AuthControllerMixin {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Center(
-          child: ImageWidget(
-            assetImage: AuthHelper.of(authType).authAssetImage,
-            imageType: ImageType.png,
-          ),
+        ImageWidget(
+          assetImage: AuthHelper.of(authType).authAssetImage,
+          imageType: ImageType.png,
+          height: assetImageHeight,
         ),
         Spacing(extraLarge),
         InputField(
@@ -59,15 +59,18 @@ class AuthPageContent extends StatelessWidget with AuthControllerMixin {
           const AppText(
             text: 'Forgot your password?',
             textAlign: TextAlign.end,
+            isBold: true,
           ),
-        Spacing(extraLarge),
+        if (authType == AuthType.sigin) Spacing(extraLarge) else Spacing(large),
         AppButton(
           onPressed: () => _authenticateUser(context),
           child: AppText(
             text: AuthHelper.of(authType).actionText,
           ),
         ),
+        Spacing(large),
         const OrLabel(),
+        Spacing(large),
         const SocialButtons(),
       ],
     );

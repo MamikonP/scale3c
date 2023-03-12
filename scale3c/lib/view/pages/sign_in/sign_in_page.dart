@@ -32,7 +32,7 @@ class SignInPage extends StatelessWidget {
         ],
       ),
       scrollable: true,
-      bodyPadding: EdgeInsets.symmetric(horizontal: largest),
+      bodyPadding: EdgeInsets.symmetric(horizontal: largest, vertical: largest),
       footer: AuthFooter(
         text: "Don't have an account?",
         spanText: 'Sign Up',

@@ -16,3 +16,5 @@ const String icMail = 'assets/icons/ic_mail.svg';
 const String icPhone = 'assets/icons/ic_phone.svg';
 const String icTwitter = 'assets/icons/ic_twitter.svg';
 const String icMenu = 'assets/icons/ic_menu.svg';
+
+const double assetImageHeight = 145;

@@ -17,7 +17,10 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        onPressed();
+      },
       style: ElevatedButton.styleFrom(
         elevation: !outlined ? 1 : 0,
         side: !outlined

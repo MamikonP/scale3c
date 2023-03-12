@@ -8,12 +8,16 @@ class ImageWidget extends StatelessWidget {
     required this.assetImage,
     this.imageType = ImageType.svg,
     this.boxFit = BoxFit.none,
+    this.width,
+    this.height,
     super.key,
   });
 
   final String assetImage;
   final ImageType imageType;
   final BoxFit boxFit;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +25,15 @@ class ImageWidget extends StatelessWidget {
       return SvgPicture.asset(
         assetImage,
         fit: boxFit,
+        height: height,
+        width: width,
       );
     }
     return Image.asset(
       assetImage,
       fit: boxFit,
+      height: height,
+      width: width,
     );
   }
 }

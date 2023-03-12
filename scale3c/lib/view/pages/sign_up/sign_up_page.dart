@@ -32,7 +32,7 @@ class SignUpPage extends StatelessWidget {
           ),
         ],
       ),
-      bodyPadding: EdgeInsets.symmetric(horizontal: largest),
+      bodyPadding: EdgeInsets.symmetric(horizontal: largest, vertical: largest),
       scrollable: true,
       footer: AuthFooter(
         text: 'Already have an account?',

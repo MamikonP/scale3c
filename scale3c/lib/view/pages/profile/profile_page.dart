@@ -16,9 +16,10 @@ class ProfilePage extends StatelessWidget {
     return AppPage(
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (BuildContext context, AuthState state) {
-          context.canPop()
-              ? context.pop()
-              : context.pushReplacement(RouteName.root);
+          state.whenOrNull(
+              success: () => context.canPop()
+                  ? context.pop()
+                  : context.pushReplacement(RouteName.root));
         },
         builder: (BuildContext context, AuthState state) {
           return state.maybeWhen(
